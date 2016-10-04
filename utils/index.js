@@ -3,7 +3,7 @@
 // npm
 const pickBy = require('lodash.pickby')
 
-const makePlan = (isp, name, down_speed, up_speed, limit, price, link) => { return { isp, name, down_speed, up_speed, limit, price, link } }
+const makePlan = (isp, name, down_speed, up_speed, limit, price, link) => { return { isp, name, down_speed, up_speed, limit, price, link } } // eslint-disable-line camelcase
 const picker = (p) => pickBy(p, (v) => v)
 const nuller = (v) => v === undefined ? null : v
 const makePlanImp = (p) => makePlan.apply(null, p)

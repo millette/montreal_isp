@@ -3,10 +3,14 @@
   "version": "0.0.0",
   "main": "index.js",
   "scripts": {
+    "lint": "standard",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "license": "AGPL-3.0",
   "dependencies": {
     "lodash.pickby": "^4.6.0"
+  },
+  "devDependencies": {
+    "standard": "^8.3.0"
   }
 }
