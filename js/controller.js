@@ -22,6 +22,10 @@ app.config(['$translateProvider', function ($translateProvider) {
         'LOWEST_PRICE': 'Lowest price',
         'HIGHEST_BANDWIDTH_LIMIT': 'Highest bandwidth limit',
         'FASTEST_SPEED': 'Fastest speed',
+        'SERVICE_TYPE': 'Service type',
+        'FIBER': 'Fiber',
+        'OTHER': 'Other',
+        'ANY': 'Any',
 
         //Titles column
         'PLAN_NAME': 'Plan Name',
@@ -59,6 +63,10 @@ app.config(['$translateProvider', function ($translateProvider) {
         'LOWEST_PRICE': 'Prix le plus bas',
         'HIGHEST_BANDWIDTH_LIMIT': 'Plus haute limite de bande passante',
         'FASTEST_SPEED': 'Vitesse la plus rapide',
+        'SERVICE_TYPE': 'Type de service',
+        'FIBER': 'Fibre',
+        'OTHER': 'Autres',
+        'ANY': 'Tous',
 
         //Titles column
         'PLAN_NAME': 'Nom du forfait',
@@ -78,7 +86,6 @@ app.config(['$translateProvider', function ($translateProvider) {
         'FOOTNOTES': 'Cette application a \u00E9t\u00E9 d\u00E9velopp\u00E9e par Philippe Arteau en utilisant <a href="http://angularjs.org/">AngularJS</a>. ' +
             'Elle est publi\u00E9e sous la license <a href="http://creativecommons.org/licenses/by/4.0/">Creative Commons</a>.'
     });
-
 
     var browserIsFrench = navLang.indexOf('fr') == 0;
     $translateProvider.preferredLanguage(browserIsFrench ? 'fr' : 'en');
@@ -127,6 +134,10 @@ function PlanListCtrl($scope, $http, $translate) {
     $scope.criteriaMatch = function () {
         return function (item) {
             return (
+                (!document.criteria.service_cable.checked || item.name.toLowerCase().indexOf('cable') !== -1 || item.name.toLowerCase().indexOf('câble') !== -1) &&
+                (!document.criteria.service_fiber.checked || item.name.toLowerCase().indexOf('fiber') !== -1 || item.name.toLowerCase().indexOf('fibre') !== -1 || item.name.toLowerCase().indexOf('fibe') !== -1 || item.name.toLowerCase().indexOf('fttn') !== -1) &&
+                (!document.criteria.service_dsl.checked || item.name.toLowerCase().indexOf('dsl') !== -1) &&
+                (!document.criteria.service_other.checked || (item.name.toLowerCase().indexOf('fiber') === -1 && item.name.toLowerCase().indexOf('fibre') === -1 && item.name.toLowerCase().indexOf('fibe') === -1 && item.name.toLowerCase().indexOf('fttn') === -1 && item.name.toLowerCase().indexOf('câble') === -1 && item.name.toLowerCase().indexOf('cable') === -1 && item.name.toLowerCase().indexOf('dsl') === -1)) &&
                 item.down_speed >= document.criteria.min_down_speed.value
                     && (item.limit >= document.criteria.min_download_limit.value || item.limit === null)
                     && (item.price <= document.criteria.montly_fee.value || document.criteria.montly_fee.value == '')
